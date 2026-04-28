@@ -3,9 +3,10 @@ on:
   workflow_dispatch:
       inputs:
         package_name:
-          description: "Package name of the game (leave empty for universal build):"
+          description: "Package name (ignored in universal build)"
           required: false
           default: ''
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -16,18 +17,9 @@ jobs:
         distribution: temurin
         java-version: 11
         cache: gradle
-
-    - name: Replace package name (if specified)
-      if: ${{ github.event.inputs.package_name != '' }}
-      run: |
-        sed -i 's/moduleDescription = "/moduleDescription = "(${{ github.event.inputs.package_name }}) /g' module.gradle
-        sed -i "s/com.game.packagename/${{ github.event.inputs.package_name }}/g" module/src/main/cpp/game.h
-
-    - name: Build with Gradle
-      run: |
+    - run: |
         chmod +x ./gradlew
         ./gradlew :module:assembleRelease
-
     - uses: actions/upload-artifact@v4
       with:
         name: zygisk-il2cppdumper

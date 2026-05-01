@@ -18,15 +18,19 @@ jobs:
         java-version: 11
         cache: gradle
     
-    # ↓↓↓ 新增：接受 Android SDK 许可证 ↓↓↓
-    - name: Accept Android SDK licenses
+    # 安装特定版本的 NDK 和 CMake
+    - name: Setup Android SDK
       run: |
-        yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --licenses 2>/dev/null || \
-        yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses 2>/dev/null || \
-        yes | $ANDROID_SDK_ROOT/tools/bin/sdkmanager --licenses 2>/dev/null || \
-        yes | $ANDROID_HOME/tools/bin/sdkmanager --licenses 2>/dev/null || \
-        echo "No sdkmanager found, using local SDK"
-    # ↑↑↑ 新增结束 ↑↑↑
+        # 接受许可证
+        yes | ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --licenses > /dev/null 2>&1 || true
+        
+        # 安装 NDK 25.2.9519653
+        ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager "ndk;25.2.9519653" > /dev/null 2>&1 || true
+        
+        # 安装 CMake 3.22.1
+        ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager "cmake;3.22.1" > /dev/null 2>&1 || true
+        
+        echo "SDK setup complete"
     
     - run: |
         chmod +x ./gradlew

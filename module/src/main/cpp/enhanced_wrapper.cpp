@@ -183,7 +183,7 @@ static void check_api_availability() {
         LOGE("WARNING: %d critical APIs missing!", missing_critical);
     }
     if (missing_total > 0) {
-        LOGW("Total missing APIs: %d/%d", missing_total, sizeof(checks)/sizeof(checks[0]));
+        LOGW("Total missing APIs: %d/%zu", missing_total, sizeof(checks)/sizeof(checks[0]));
     }
 }
 

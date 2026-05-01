@@ -19,5 +19,6 @@ extern void* (*il2cpp_class_get_properties)(void*, void**);
 extern const char* (*il2cpp_method_get_name)(void*);
 extern const char* (*il2cpp_field_get_name)(void*);
 extern void* (*il2cpp_field_get_type)(void*);
+extern const char* (*il2cpp_method_get_param_name)(void*, uint32_t);
 
 #endif

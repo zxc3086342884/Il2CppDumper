@@ -6,6 +6,7 @@
 #include <fstream>
 #include <sstream>
 #include <cstring>
+#include "il2cpp_api_extern.h"
 #include <sys/stat.h>
 
 // 全局开关，默认关闭

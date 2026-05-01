@@ -1,6 +1,9 @@
 #ifndef IL2CPP_API_EXTERN_H
 #define IL2CPP_API_EXTERN_H
 
+#include <cstddef>
+#include <cstdint>
+
 // 这些函数指针在 il2cpp_dump.cpp 中定义并动态赋值
 // 其他文件可以通过 extern 声明来使用它们
 
@@ -17,8 +20,8 @@ extern void* (*il2cpp_class_get_methods)(void*, void**);
 extern void* (*il2cpp_class_get_fields)(void*, void**);
 extern void* (*il2cpp_class_get_properties)(void*, void**);
 extern const char* (*il2cpp_method_get_name)(void*);
+extern const char* (*il2cpp_method_get_param_name)(void*, uint32_t);
 extern const char* (*il2cpp_field_get_name)(void*);
 extern void* (*il2cpp_field_get_type)(void*);
-extern const char* (*il2cpp_method_get_param_name)(void*, uint32_t);
 
 #endif

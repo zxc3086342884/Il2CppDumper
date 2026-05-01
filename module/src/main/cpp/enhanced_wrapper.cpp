@@ -201,7 +201,7 @@ static bool verify_dump_result(const char* outDir, DumpStatistics* stats) {
         return false;
     }
     
-    LOGI("Dump file size: %ld bytes", file_stat.st_size);
+    LOGI("Dump file size: %lld bytes", (long long)file_stat.st_size);
     
     // 读取文件内容
     std::ifstream file(path);
@@ -321,7 +321,7 @@ bool enhanced_dump_with_fallback(void* il2cpp_handle, const char* outDir, DumpSt
     il2cpp_dump(outDir);
     
     auto end_time = time(nullptr);
-    LOGI("Dump execution time: %ld seconds", end_time - start_time);
+    LOGI("Dump execution time: %lld seconds", (long long)(end_time - start_time));
     
     // 5. 验证结果
     LOGI("[Step 5/5] Verifying dump results...");

@@ -1,12 +1,12 @@
 #include "enhanced_wrapper.h"
 #include "il2cpp_dump.h"
+#include "il2cpp_api_extern.h"
 #include "log.h"
 #include "xdl.h"
 #include <unistd.h>
 #include <fstream>
 #include <sstream>
 #include <cstring>
-#include "il2cpp_api_extern.h"
 #include <sys/stat.h>
 
 // 全局开关，默认关闭
@@ -44,7 +44,7 @@ static int get_class_count_quick() {
         return -1;
     }
     
-    auto assemblies = il2cpp_domain_get_assemblies(domain, &size);
+    auto assemblies = (void**)il2cpp_domain_get_assemblies(domain, &size);
     if (!assemblies) {
         LOGW("Assemblies array is null");
         return -1;
@@ -187,7 +187,6 @@ static void check_api_availability() {
     }
 }
 
-// 验证dump结果
 // 验证dump结果
 static bool verify_dump_result(const char* outDir, DumpStatistics* stats) {
     char path[512];
